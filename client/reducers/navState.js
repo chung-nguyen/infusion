@@ -1,6 +1,6 @@
 import AppNavigator from "../AppNavigator";
 
-const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams("Login"));
+const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams("Home"));
 
 export default (navReducer = (state = initialState, action) => {
     const nextState = AppNavigator.router.getStateForAction(action, state);
