@@ -6,10 +6,13 @@ const DEFAULT_STATE = {};
 
 export default function authenticate(state = DEFAULT_STATE, action) {
     switch (action.type) {
+        case REHYDRATE:
+            return { ...state, ...action.payload.authenticate };
+
         case ActionTypes.SET_AUTHENTICATE_STATE:
             return {
-                ...state,
-                ...action.state
+                ...action.state,
+                ...state
             };
     }
 

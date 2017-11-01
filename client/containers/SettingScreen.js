@@ -9,12 +9,9 @@ import md5 from "../utils/md5";
 import { scaleStyle } from "../utils/scaleUIStyle";
 import * as Actions from "../reducers/actions";
 
-import CommonNavOpts from "./CommonNavOpts";
-
 class SettingScreen extends React.Component {
     static navigationOptions = {
-        title: "Settings",
-        ...CommonNavOpts
+        title: "Settings"
     };
 
     state = {};

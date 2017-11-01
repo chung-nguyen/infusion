@@ -7,6 +7,7 @@ import RegimenInfoScreen from "./containers/RegimenInfoScreen";
 import DummyScreen from "./containers/DummyScreen";
 
 import MainNavigator from "./MainNavigator";
+import { scaleStyle } from "./utils/scaleUIStyle";
 
 export default StackNavigator(
     {
@@ -19,6 +20,9 @@ export default StackNavigator(
         Main: { screen: MainNavigator }
     },
     {
-        initialRouteName: "Home"
+        initialRouteName: "Home",
+        navigationOptions: {
+            headerStyle: scaleStyle({ height: 40 })
+        }
     }
 );

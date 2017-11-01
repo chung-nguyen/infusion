@@ -8,12 +8,9 @@ import config from "../config";
 import md5 from "../utils/md5";
 import { scaleStyle } from "../utils/scaleUIStyle";
 
-import CommonNavOpts from "./CommonNavOpts";
-
 class DataScreen extends React.Component {
     static navigationOptions = {
-        title: "Data",
-        ...CommonNavOpts
+        title: "Data"
     };
 
     state = {

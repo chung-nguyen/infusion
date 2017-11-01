@@ -11,8 +11,8 @@ import middleware from "./middleware";
 
 import AppNavigator from "./AppNavigator";
 
+// Initialize the store
 const store = createStore(reducers, undefined, compose(middleware));
-
 persistStore(store, { blacklist: ["authenticate", "navState"], storage: AsyncStorage });
 
 class App extends React.Component {    

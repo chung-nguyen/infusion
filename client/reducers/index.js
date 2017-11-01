@@ -3,11 +3,13 @@ import { combineReducers } from "redux";
 import navState from "./navState";
 import appState from "./appState";
 import authenticate from "./authenticate";
+import regimenInfo from "./regimenInfo";
 
 const reduce = combineReducers({
     navState,
     appState,
-    authenticate
+    authenticate,
+    regimenInfo
 });
 
 export default function(state, action) {
