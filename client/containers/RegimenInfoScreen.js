@@ -44,8 +44,11 @@ class RegimenInfoScreen extends React.Component {
     }
 
     onSubmit = () => {
+        // TODO: better unique ID generation, but perhaps this is enough
+        var regimenData = { ...this.state, id: Date.now().toString() };
+
         this.props
-            .dispatch(ActionTypes.setRegimenInfo(this.state))
+            .dispatch(ActionTypes.setRegimenInfo(regimenData))
             .then(() => {
                 return this.props.dispatch(
                     NavigationActions.reset({
@@ -59,9 +62,9 @@ class RegimenInfoScreen extends React.Component {
             });
     };
 
-    _updateProps = (props) => {
+    _updateProps = props => {
         this.setState(props.regimenInfo);
-    }
+    };
 }
 
 export default connect(state => ({

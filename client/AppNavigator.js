@@ -4,6 +4,7 @@ import HomeScreen from "./containers/HomeScreen";
 import LoginScreen from "./containers/LoginScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import RegimenInfoScreen from "./containers/RegimenInfoScreen";
+import InputSideEffectsScreen from "./containers/InputSideEffectsScreen";
 import DummyScreen from "./containers/DummyScreen";
 
 import MainNavigator from "./MainNavigator";
@@ -16,6 +17,7 @@ export default StackNavigator(
         SignUp: { screen: SignUpScreen },
         RegimenInfo: { screen: RegimenInfoScreen },
         Dummy: { screen: DummyScreen },
+        InputSideEffects: { screen: InputSideEffectsScreen },
 
         Main: { screen: MainNavigator }
     },

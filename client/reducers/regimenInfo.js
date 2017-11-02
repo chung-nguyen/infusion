@@ -3,6 +3,7 @@ import { REHYDRATE } from "redux-persist/constants";
 import * as ActionTypes from "./actions";
 
 const DEFAULT_STATE = {
+    id: null,
     dayPerInfusion: 0,
     numberOfInfusion: 0,
     startInfusionDate: 0

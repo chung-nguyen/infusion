@@ -19,7 +19,7 @@ class HomeScreen extends React.Component {
 
     isRegimenInfoFilled() {
         const regimenInfo = this.props.regimenInfo;
-        return regimenInfo.dayPerInfusion > 0 && regimenInfo.numberOfInfusion > 0 && regimenInfo.startInfusionDate > 0;
+        return regimenInfo.id != null && regimenInfo.dayPerInfusion > 0 && regimenInfo.numberOfInfusion > 0 && regimenInfo.startInfusionDate > 0;
     }
 
     componentWillUnmount() {
