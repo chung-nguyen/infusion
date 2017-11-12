@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-charts-wrapper')
     compile project(':react-native-spinkit')
     compile project(':react-native-fetch-blob')
     compile(project(':react-native-firebase')) {

@@ -39,6 +39,8 @@
 		2ACE9EC72DFA4B90A5F12411 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C057F424DAFD413FB7E7CE57 /* libRNFirebase.a */; };
 		C9AF5E0D6FBC4931A91B52F0 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A3FEA87234479F88F95745 /* libRNFetchBlob.a */; };
 		79501C8FB6E04E678E42C4B3 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7A1AC2E71448619FC5C054 /* libRNSpinkit.a */; };
+		24589DF83BD44F0C869AB35A /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F468167AAD0E4FD49A7D231D /* MyriadPro-Bold.otf */; };
+		7335FD6E27444552B4093499 /* MyriadPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B0D7351018645299FD048A4 /* MyriadPro-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +274,8 @@
 		59A3FEA87234479F88F95745 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		1AF5BC6AE252409093FD354C /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; name = "RNSpinkit.xcodeproj"; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		2B7A1AC2E71448619FC5C054 /* libRNSpinkit.a */ = {isa = PBXFileReference; name = "libRNSpinkit.a"; path = "libRNSpinkit.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		F468167AAD0E4FD49A7D231D /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; name = "MyriadPro-Bold.otf"; path = "../assets/fonts/MyriadPro-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3B0D7351018645299FD048A4 /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; name = "MyriadPro-Regular.otf"; path = "../assets/fonts/MyriadPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -494,6 +498,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* clientTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				7978D00D7079403FA2793BE0 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -518,6 +523,16 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		7978D00D7079403FA2793BE0 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				F468167AAD0E4FD49A7D231D /* MyriadPro-Bold.otf */,
+				3B0D7351018645299FD048A4 /* MyriadPro-Regular.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -888,6 +903,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				24589DF83BD44F0C869AB35A /* MyriadPro-Bold.otf in Resources */,
+				7335FD6E27444552B4093499 /* MyriadPro-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

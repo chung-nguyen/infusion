@@ -15,7 +15,8 @@ export default TabNavigator(
     {
         initialRouteName: "Overview",
         navigationOptions: {
-            headerStyle: scaleStyle({ height: 40 })
-        }
+            headerStyle: scaleStyle({ height: 40 })            
+        },
+        cardStyle: { backgroundColor: "#ffffff" }
     }
 );

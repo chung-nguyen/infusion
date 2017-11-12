@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Platform, AsyncStorage } from "react-native";
+import { Platform, BackAndroid, AsyncStorage } from "react-native";
 import { addNavigationHelpers, NavigationActions } from "react-navigation";
 
 import { compose, applyMiddleware, createStore } from "redux";
 import { persistStore, autoRehydrate } from "redux-persist";
 import { Provider, connect } from "react-redux";
+import Spinner from "react-native-spinkit";
 
 import reducers from "./reducers";
 import middleware from "./middleware";
@@ -25,6 +26,17 @@ class App extends React.Component {
                 })}
             />
         );
+    }
+
+    componentDidMount() {
+        if (Platform.OS === 'android') {
+            BackAndroid.addEventListener('hardwareBackPress', this.onHardwareBackPress);
+        }
+    }
+
+    onHardwareBackPress = () => {
+        this.props.dispatch(NavigationActions.back({}));
+        return true;
     }
 }
 

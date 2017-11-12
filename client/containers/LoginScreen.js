@@ -1,18 +1,18 @@
 import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, Image, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
 import firebase from "react-native-firebase";
-import Spinner from "react-native-spinkit";
 
 import config from "../config";
 import md5 from "../utils/md5";
-import { scaleStyle } from "../utils/scaleUIStyle";
+import { scaleStyle, scaleStyleSheet } from "../utils/scaleUIStyle";
 import * as Actions from "../reducers/actions";
 
 class LoginScreen extends React.Component {
     static navigationOptions = {
-        title: "Login"
+        title: "Login",
+        header: null
     };
 
     state = {
@@ -25,16 +25,14 @@ class LoginScreen extends React.Component {
 
     render() {
         return (
-            <View>
+            <View>                
                 <Text>Email:</Text>
                 <TextInput onChangeText={text => this.setState({ email: text })} value={this.state.email} />
                 <Text>Password:</Text>
                 <TextInput onChangeText={text => this.setState({ password: text })} secureTextEntry={true} value={this.state.password} />
                 <Button onPress={this.onPressLogin} title="Login" color="#841584" />
                 <Button onPress={this.onPressSignUp} title="Sign Up" color="#841584" />
-                <Button onPress={this.onPressLoginWithCancerBase} title="Login with Cancer Base" color="#841584" />
-
-                <Spinner isVisible={this.state.isLoading} size={50 * config.UI_SCALE} type="Circle" color="#000000" />
+                <Button onPress={this.onPressLoginWithCancerBase} title="Login with Cancer Base" color="#841584" />                
             </View>
         );
     }
@@ -79,3 +77,8 @@ class LoginScreen extends React.Component {
 export default connect(state => ({
     navState: state.navState
 }))(LoginScreen);
+
+const styles = StyleSheet.create(scaleStyleSheet({
+    vgap20: { height: 20 },
+    logo: { width: 400, height: 400 }
+}));
