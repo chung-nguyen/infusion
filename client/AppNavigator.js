@@ -24,7 +24,7 @@ export default StackNavigator(
     {
         initialRouteName: "Home",
         navigationOptions: {
-            headerStyle: scaleStyle({ height: 40 })
+            headerStyle: scaleStyle({ height: 80 })
         },
         cardStyle: { backgroundColor: "#ffffff" }
     }

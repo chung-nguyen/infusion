@@ -35,7 +35,7 @@ class SettingScreen extends React.Component {
                     this.props.dispatch(
                         NavigationActions.reset({
                             index: 0,
-                            actions: [NavigationActions.navigate({ routeName: "Login" })]
+                            actions: [NavigationActions.navigate({ routeName: "Home" })]
                         })
                     );
                 });

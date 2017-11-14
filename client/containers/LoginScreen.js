@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput, Button, Image, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, Image, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
 import firebase from "react-native-firebase";
@@ -9,10 +9,11 @@ import md5 from "../utils/md5";
 import { scaleStyle, scaleStyleSheet } from "../utils/scaleUIStyle";
 import * as Actions from "../reducers/actions";
 
+import LoadingOverlay from "../components/LoadingOverlay";
+
 class LoginScreen extends React.Component {
     static navigationOptions = {
-        title: "Login",
-        header: null
+        title: "Login"
     };
 
     state = {
@@ -25,14 +26,29 @@ class LoginScreen extends React.Component {
 
     render() {
         return (
-            <View>                
-                <Text>Email:</Text>
-                <TextInput onChangeText={text => this.setState({ email: text })} value={this.state.email} />
-                <Text>Password:</Text>
-                <TextInput onChangeText={text => this.setState({ password: text })} secureTextEntry={true} value={this.state.password} />
-                <Button onPress={this.onPressLogin} title="Login" color="#841584" />
-                <Button onPress={this.onPressSignUp} title="Sign Up" color="#841584" />
-                <Button onPress={this.onPressLoginWithCancerBase} title="Login with Cancer Base" color="#841584" />                
+            <View style={styles.flex}>
+                <View style={styles.vgap20} />
+
+                <Text style={styles.formLabel}>Email/Account</Text>
+                <TextInput onChangeText={text => this.setState({ email: text })} value={this.state.email} style={styles.formInput} />
+
+                <View style={styles.vgap20} />
+
+                <Text style={styles.formLabel}>Password:</Text>
+                <TextInput
+                    onChangeText={text => this.setState({ password: text })}
+                    secureTextEntry={true}
+                    value={this.state.password}
+                    style={styles.formInput}
+                />
+
+                <View style={styles.flex} />
+
+                <TouchableOpacity onPress={this.onPressLogin} style={styles.button}>
+                    <Text style={styles.buttonText}>Submit</Text>
+                </TouchableOpacity>
+
+                <LoadingOverlay isVisible={this.state.isLoading} />
             </View>
         );
     }
@@ -46,39 +62,45 @@ class LoginScreen extends React.Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
-                if (user) {
-                    return this.props.dispatch(Actions.setAuthenticateState({ user })).then(() => {
-                        this.props.dispatch(
-                            NavigationActions.reset({
-                                index: 0,
-                                actions: [NavigationActions.navigate({ routeName: "RegimenInfo" })]
-                            })
-                        );
-                    });
-                } else {
-                    // TODO: show error
+                if (!user) {
+                    Alert.alert("Error", "Wrong email or password !", [{ text: "OK", onPress: () => {} }], { cancelable: true });
                 }
+
                 this.setState({ isLoading: false });
             })
             .catch(err => {
-                // TODO: show error message
-                console.error(err);
+                Alert.alert("Error", err.toString(), [{ text: "OK", onPress: () => {} }], { cancelable: true });
                 this.setState({ isLoading: false });
             });
     };
-
-    onPressSignUp = () => {
-        this.props.dispatch(NavigationActions.navigate({ routeName: "SignUp" }));
-    };
-
-    onPressLoginWithCancerBase() {}
 }
 
 export default connect(state => ({
     navState: state.navState
 }))(LoginScreen);
 
-const styles = StyleSheet.create(scaleStyleSheet({
-    vgap20: { height: 20 },
-    logo: { width: 400, height: 400 }
-}));
+const styles = StyleSheet.create(
+    scaleStyleSheet({
+        vgap20: { height: 20 },
+        vgap60: { height: 60 },
+        vgap70: { height: 70 },
+        vgap100: { height: 100 },
+        flex: { flex: 1 },
+        formLabel: {
+            fontFamily: config.GENERIC_FONT,
+            fontSize: 24,
+            fontWeight: "normal",
+            margin: 10
+        },
+        formInput: {
+            margin: 20
+        },
+        button: { backgroundColor: "#f4f5f9", alignItems: "center", justifyContent: "center", padding: 20 },
+        buttonText: {
+            fontFamily: config.GENERIC_FONT,
+            fontSize: 32,
+            fontWeight: "normal",
+            color: "#0477ff"
+        }
+    })
+);

@@ -1,13 +1,14 @@
 import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { connect } from "react-redux";
 import firebase from "react-native-firebase";
-import Spinner from "react-native-spinkit";
 
 import config from "../config";
 import md5 from "../utils/md5";
-import { scaleStyle } from "../utils/scaleUIStyle";
+import { scaleStyle, scaleStyleSheet } from "../utils/scaleUIStyle";
 import * as Actions from "../reducers/actions";
+
+import LoadingOverlay from "../components/LoadingOverlay";
 
 class SignUpScreen extends React.Component {
     static navigationOptions = {
@@ -25,26 +26,40 @@ class SignUpScreen extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.flex}>
                 {this.state.step === 0 && (
-                    <View>
-                        <Text>Email:</Text>
-                        <TextInput onChangeText={text => this.setState({ email: text })} value={this.state.email} />
-                        <Text>Password:</Text>
-                        <TextInput onChangeText={text => this.setState({ password: text })} secureTextEntry={true} value={this.state.password} />
+                    <View style={styles.flex}>
+                        <View style={styles.vgap20} />
 
-                        <Button onPress={this.onPressSignUp} title="Sign Up" color="#841584" />
+                        <Text style={styles.formLabel}>Email/Account:</Text>
+                        <TextInput onChangeText={text => this.setState({ email: text })} value={this.state.email} style={styles.formInput} />
+
+                        <View style={styles.vgap20} />
+
+                        <Text style={styles.formLabel}>Password:</Text>
+                        <TextInput onChangeText={text => this.setState({ password: text })} secureTextEntry={true} value={this.state.password} style={styles.formInput} />
+
+                        <View style={styles.flex} />
+
+                        <TouchableOpacity onPress={this.onPressSignUp} style={styles.button}>
+                            <Text style={styles.buttonText}>Submit</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
 
                 {this.state.step === 1 && (
-                    <View>
+                    <View style={styles.flex}>
                         <Text>EULA</Text>
-                        <Button onPress={this.onPressAgree} title="Agree" color="#841584" />
+
+                        <View style={styles.flex} />
+
+                        <TouchableOpacity onPress={this.onPressAgree} style={styles.button}>
+                            <Text style={styles.buttonText}>Agree</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
 
-                <Spinner isVisible={this.state.isLoading} size={50 * config.UI_SCALE} type="Circle" color="#000000" />
+                <LoadingOverlay isVisible={this.state.isLoading} />
             </View>
         );
     }
@@ -72,14 +87,13 @@ class SignUpScreen extends React.Component {
                         );
                     });
                 } else {
-                    // TODO: show error
+                    Alert.alert("Error", "The email was already registered.", [{ text: "OK", onPress: () => {} }], { cancelable: true });
                 }
 
                 this.setState({ isLoading: false });
             })
             .catch(err => {
-                // TODO: show error
-
+                Alert.alert("Error", err.toString(), [{ text: "OK", onPress: () => {} }], { cancelable: true });
                 this.setState({ isLoading: false });
             });
     };
@@ -88,3 +102,29 @@ class SignUpScreen extends React.Component {
 export default connect(state => ({
     navState: state.navState
 }))(SignUpScreen);
+
+const styles = StyleSheet.create(
+    scaleStyleSheet({
+        vgap20: { height: 20 },
+        vgap60: { height: 60 },
+        vgap70: { height: 70 },
+        vgap100: { height: 100 },
+        flex: { flex: 1 },
+        formLabel: {
+            fontFamily: config.GENERIC_FONT,
+            fontSize: 24,
+            fontWeight: "normal",
+            margin: 10
+        },
+        formInput: {
+            margin: 20
+        },
+        button: { backgroundColor: "#f4f5f9", alignItems: "center", justifyContent: "center", padding: 20 },
+        buttonText: {
+            fontFamily: config.GENERIC_FONT,
+            fontSize: 32,
+            fontWeight: "normal",
+            color: "#0477ff"
+        }
+    })
+);

@@ -25,8 +25,6 @@ class HomeScreen extends React.Component {
 
     constructor() {
         super();
-
-        this.unsubscriber = null;
     }
 
     isRegimenInfoFilled() {
@@ -34,47 +32,35 @@ class HomeScreen extends React.Component {
         return regimenInfo.id != null && regimenInfo.dayPerInfusion > 0 && regimenInfo.numberOfInfusion > 0 && regimenInfo.startInfusionDate > 0;
     }
 
-    componentWillUnmount() {
-        if (this.unsubscriber) {
-            this.unsubscriber();
-        }
+    componentDidMount() {
+        this._updateProps(this.props);
+        this.setState({ isLoading: !this.props.appState.rehydrated });
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.appState.rehydrated) {
-            this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    this.props
-                        .dispatch(Actions.setAuthenticateState({ user }))
-                        .then(() => {
-                            if (this.isRegimenInfoFilled()) {
-                                this.props.dispatch(
-                                    NavigationActions.reset({
-                                        index: 0,
-                                        actions: [NavigationActions.navigate({ routeName: "Main" })]
-                                    })
-                                );
-                            } else {
-                                this.props.dispatch(
-                                    NavigationActions.reset({
-                                        index: 0,
-                                        actions: [NavigationActions.navigate({ routeName: "RegimenInfo" })]
-                                    })
-                                );
-                            }
-
-                            this.setState({ isLoading: false });
-                        })
-                        .catch(err => {
-                            this.setState({ isLoading: false });
-
-                            Alert.alert("Error", err.toString(), [{ text: "OK", onPress: () => {} }], { cancelable: true });
-                        });
-                } else {
-                    this.setState({ isLoading: false });
-                }
-            });
+        if (nextProps.appState.rehydrated && nextProps.authenticate !== this.props.authenticate) {
+            this._updateProps(nextProps);
         }
+    }
+
+    _updateProps(props) {
+        if (props.authenticate.user) {
+            if (this.isRegimenInfoFilled()) {
+                this.props.dispatch(
+                    NavigationActions.reset({
+                        index: 0,
+                        actions: [NavigationActions.navigate({ routeName: "Main" })]
+                    })
+                );
+            } else {
+                this.props.dispatch(
+                    NavigationActions.reset({
+                        index: 0,
+                        actions: [NavigationActions.navigate({ routeName: "RegimenInfo" })]
+                    })
+                );
+            }                
+        }        
     }
 
     render() {
@@ -125,7 +111,8 @@ class HomeScreen extends React.Component {
 export default connect(state => ({
     navState: state.navState,
     regimenInfo: state.regimenInfo,
-    appState: state.appState
+    appState: state.appState,
+    authenticate: state.authenticate
 }))(HomeScreen);
 
 const styles = StyleSheet.create(

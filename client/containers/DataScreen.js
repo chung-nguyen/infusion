@@ -17,11 +17,13 @@ class DataScreen extends React.Component {
     state = {};
 
     componentDidMount() {
-        this._updateProps(this.props);
+        this._updateProps(this.props, true);
     }
 
     componentWillReceiveProps(nextProps) {
-        this._updateProps(nextProps);
+        if (nextProps.sideEffect != this.props.sideEffect) {
+            this._updateProps(nextProps, false);
+        }
     }
 
     render() {
@@ -32,7 +34,7 @@ class DataScreen extends React.Component {
         return {};
     }
 
-    _updateProps(props) {
+    _updateProps(props, fetchSideEffect) {
         var regimenId = props.regimenInfo.id;
         var sideEffect = props.sideEffect[regimenId];
         if (sideEffect) {
@@ -45,7 +47,9 @@ class DataScreen extends React.Component {
                 });
             }
         } else {
-            this.props.dispatch(ActionTypes.fetchFirebaseData("sideEffect", regimenId));
+            if (fetchSideEffect) {
+                this.props.dispatch(ActionTypes.fetchFirebaseData("sideEffect", regimenId));
+            }
         }
     }
 }

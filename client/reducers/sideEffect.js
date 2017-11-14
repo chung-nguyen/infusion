@@ -21,7 +21,7 @@ export default function appState(state = DEFAULT_STATE, action) {
         case ActionTypes.SYNC_FIREBASE_DATA:
             if (action.path === "sideEffect") {
                 var newState = { ...state };
-                const { subpaths, data } = actions;
+                const { subpaths, data } = action;
 
                 var substate = newState;
                 for (var i = 0; i < subpaths.length - 1; ++i) {
