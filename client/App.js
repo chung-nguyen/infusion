@@ -34,18 +34,19 @@ class App extends React.Component {
     componentDidMount() {
         BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
 
-        this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
-            console.log("SUBSRIBE!!!");
-            if (user) {
-                this.props.dispatch(Actions.setAuthenticateState({ user }));
-            }
-        });
+        // Temporarily remove this, firebase should be isolated as a service
+        // this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
+        //     console.log("SUBSRIBE!!!");
+        //     if (user) {
+        //         this.props.dispatch(Actions.setAuthenticateState({ user }));
+        //     }
+        // });
     }
 
     componentWillUnmount() {
-        if (this.unsubscriber) {
-            this.unsubscriber();
-        }
+        // if (this.unsubscriber) {
+        //     this.unsubscriber();
+        // }
     }
 
     onHardwareBackPress = () => {
