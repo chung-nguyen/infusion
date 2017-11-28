@@ -1,0 +1,119 @@
+Package Report
+
+-----------------------------------------------------------------------------
+Document:
+Name: infusion_wireframes.ai
+Color Mode: RGB color
+Color Profile: sRGB IEC61966-2.1
+Ruler Units: inches
+Artboard Dimensions: 60.7917 in x 50 in
+Show Images in Outline Mode: OFF
+Highlight Substituted Fonts: OFF
+Highlight Substituted Glyphs: OFF
+Preserve Text Editability
+Simulate Colored Paper: OFF
+
+-----------------------------------------------------------------------------
+Spot Color Objects:
+
+-----------------------------------------------------------------------------
+Missing Fonts:NONE
+
+-----------------------------------------------------------------------------
+Protected Fonts that were not packaged:NONE
+
+-----------------------------------------------------------------------------
+Fonts:
+Myriad Pro (OTF)
+Myriad Pro Bold (OTF)
+
+-----------------------------------------------------------------------------
+Embedded Fonts:
+NONE
+
+-----------------------------------------------------------------------------
+Missing Links:
+NONE
+
+-----------------------------------------------------------------------------
+Linked Images:
+
+/Users/serhan/Documents/USC-Michelson/wireframes/drive-download-20171026T173109Z-001/symptomdata.png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 6993K, 1126 by 1590 pixels
+Dimensions: 434 by 646 points 
+Resolution: 186.802 by 177.214 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/drive-download-20171026T173109Z-001/symptompage.png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 6809K, 986 by 1768 pixels
+Dimensions: 441 by 790.759 points 
+Resolution: 160.98 by 160.98 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/Pasted_Image_11_1_17__7_12_PM.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 8471K, 1744 by 1658 pixels
+Dimensions: 872 by 829 points 
+Resolution: 144 by 144 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/drive-download-20171026T173109Z-001/login_2.jpg
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 8034K, 1242 by 2208 pixels
+Dimensions: 444.375 by 790 points 
+Resolution: 201.235 by 201.235 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/drive-download-20171026T173109Z-001/login.jpg
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 8034K, 1242 by 2208 pixels
+Dimensions: 444 by 789.333 points 
+Resolution: 201.405 by 201.405 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/Screen Shot 2017-11-01 at 7.55.27 PM
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 3862K, 748 by 1322 pixels
+Dimensions: 441.331 by 780 points 
+Resolution: 122.031 by 122.031 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/drive-download-20171026T173109Z-001/signIn_1.jpg
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 8034K, 1242 by 2208 pixels
+Dimensions: 444.375 by 790 points 
+Resolution: 201.235 by 201.235 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/drive-download-20171026T173109Z-001/Pasted_Image_11_1_17__7_30_PM (1).png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 15408K, 2698 by 1462 pixels
+Dimensions: 1349 by 731 points 
+Resolution: 144 by 144 pixels per inch
+
+
+/Users/serhan/Documents/USC-Michelson/wireframes/Screen Shot 2017-11-01 at 7.56.08 PM
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 3856K, 748 by 1320 pixels
+Dimensions: 441 by 778.235 points 
+Resolution: 122.122 by 122.122 pixels per inch
