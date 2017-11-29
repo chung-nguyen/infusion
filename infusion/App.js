@@ -1,23 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {UIManager, View, Text} from 'react-native';
+import {Provider} from 'react-redux';
+import {AppLoading, Font} from 'expo';
+import AppWithNavigationState from './app/navigators/AppNavigator';
+import store from './app/stores/configureStore';
+import config from './app/config';
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+    state = {isReady: false};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    componentWillMount() {
+        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+
+    async _loadAssetsAsync() {
+        await Promise.all([
+            Font.loadAsync({
+                [config.GENERIC_FONT]: require('./app/assets/fonts/MyriadPro-Regular.otf'),
+                [config.GENERIC_FONT_BOLD]: require('./app/assets/fonts/MyriadPro-Bold.otf')
+            })
+        ]);
+    }
+
+    render() {
+        if (this.state.isReady) {
+            return (
+                <Provider store={store}>
+                    <AppWithNavigationState/>
+                </Provider>
+            );
+        } else {
+            return (
+                <AppLoading
+                    startAsync={this._loadAssetsAsync}
+                    onFinish={() => this.setState({ isReady: true })}
+                    onError={console.warn}
+                />
+            );
+        }
+    }
+}
