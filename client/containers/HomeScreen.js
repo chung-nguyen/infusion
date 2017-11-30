@@ -34,11 +34,11 @@ class HomeScreen extends React.Component {
 
     componentDidMount() {
         this._updateProps(this.props);
-        this.setState({ isLoading: !this.props.appState.rehydrated });
+        this.setState({ isLoading: !this.props.appState.reHydrated });
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.appState.rehydrated && nextProps.authenticate !== this.props.authenticate) {
+        if (nextProps.appState.reHydrated && nextProps.authenticate !== this.props.authenticate) {
             this._updateProps(nextProps);
         }
     }

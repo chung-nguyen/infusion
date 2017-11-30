@@ -1,14 +1,13 @@
-import { REHYDRATE } from "redux-persist/constants";
-
-import * as ActionTypes from "./actions";
+import {REHYDRATE} from "redux-persist/src/constants";
+import * as types from "./action-types";
 
 const DEFAULT_STATE = {
-    reHydrated: false
+    rehydrated: false
 };
 
 export default function appState(state = DEFAULT_STATE, action) {
     switch (action.type) {
-        case ActionTypes.SET_APP_STATE:
+        case types.SET_APP_STATE:
             if (!action.state) {
                 return DEFAULT_STATE;
             }
@@ -19,7 +18,7 @@ export default function appState(state = DEFAULT_STATE, action) {
             };
 
         case REHYDRATE:
-            return { ...state, ...action.payload.appState, reHydrated: true };
+            return {...state, ...action.payload.appState, rehydrated: true};
     }
 
     return state;

@@ -49,7 +49,7 @@ class AppWithNavigationState extends Component {
 
 AppWithNavigationState.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    rootNav: PropTypes.object.isRequired,
+    appNav: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
