@@ -5,12 +5,15 @@ import {AppLoading, Font} from 'expo';
 import AppWithNavigationState from './app/navigators/AppNavigator';
 import store from './app/stores/configureStore';
 import config from './app/config';
+import {initializeFirebase} from './app/services/firebase-service';
 
 export default class App extends React.Component {
     state = {isReady: false};
 
     componentWillMount() {
         UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+
+        initializeFirebase();
     }
 
     async _loadAssetsAsync() {

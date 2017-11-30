@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { connect } from "react-redux";
+import {Alert, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {connect} from "react-redux";
 import firebase from "react-native-firebase";
 
 import config from "../config";
 import md5 from "../utils/md5";
-import { scaleStyle, scaleStyleSheet } from "../utils/scaleUIStyle";
+import {scaleStyleSheet} from "../utils/scaleUIStyle";
 import * as Actions from "../reducers/actions";
 
 import LoadingOverlay from "../components/LoadingOverlay";
@@ -16,8 +16,8 @@ class SignUpScreen extends React.Component {
     };
 
     state = {
-        email: "test@gmail.com",
-        password: "abc123",
+        email: "tiendv.52@gmail.com",
+        password: "111111",
         step: 0,
         isLoading: false
     };

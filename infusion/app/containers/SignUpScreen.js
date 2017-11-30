@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { connect } from "react-redux";
-// import firebase from "react-native-firebase";
-
+import {Alert, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {connect} from "react-redux";
+import {scaleStyleSheet} from "../utils/scaleUIStyle";
+import {NavigationActions} from "react-navigation";
 import config from "../config";
 import md5 from "../utils/md5";
-import { scaleStyle, scaleStyleSheet } from "../utils/scaleUIStyle";
+import * as firebase from "firebase";
+import {verifyAuthenticateState} from "../stores/authenticate/actions";
 
 import LoadingOverlay from "../components/LoadingOverlay";
 
@@ -72,29 +73,28 @@ class SignUpScreen extends React.Component {
         const password = md5(this.state.password, config.PASSWORD_SECRET);
 
         this.setState({ isLoading: true });
-        // firebase
-        //     .auth()
-        //     .createUserWithEmailAndPassword(email, password)
-        //     .then(user => {
-        //         if (user) {
-        //             this.props.dispatch(Actions.setAuthenticateState({ user })).then(() => {
-        //                 this.props.dispatch(
-        //                     NavigationActions.reset({
-        //                         index: 0,
-        //                         actions: [NavigationActions.navigate({ routeName: "RegimenInfo" })]
-        //                     })
-        //                 );
-        //             });
-        //         } else {
-        //             Alert.alert("Error", "The email was already registered.", [{ text: "OK", onPress: () => {} }], { cancelable: true });
-        //         }
-        //
-        //         this.setState({ isLoading: false });
-        //     })
-        //     .catch(err => {
-        //         Alert.alert("Error", err.toString(), [{ text: "OK", onPress: () => {} }], { cancelable: true });
-        //         this.setState({ isLoading: false });
-        //     });
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(user => {
+                if (user) {
+                    this.props.dispatch(verifyAuthenticateState({user}));
+                } else {
+                    Alert.alert("Error", "The email was already registered.", [{
+                        text: "OK", onPress: () => {
+                        }
+                    }], {cancelable: true});
+                }
+
+                this.setState({isLoading: false});
+            })
+            .catch(err => {
+                Alert.alert("Error", err.toString(), [{
+                    text: "OK", onPress: () => {
+                    }
+                }], {cancelable: true});
+                this.setState({isLoading: false});
+            });
     };
 }
 
