@@ -1,31 +1,30 @@
 import {applyMiddleware, createStore} from "redux";
 import logger from "redux-logger";
-// import createSagaMiddleware from "redux-saga";
-import reducer from "./reducer";
-// import saga from "../sagas";
-import {Constants} from "expo";
+import { persistStore, persistCombineReducers } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import createSagaMiddleware from "redux-saga";
+import reducers from "./reducer";
+import saga from "../sagas";
+
+const config = {
+    key: 'root',
+    blacklist: ["authenticate", "appNav"],
+    storage,
+};
+
+const reducer = persistCombineReducers(config, reducers);
 
 //  Returns the store instance
 // It can  also take initialState argument when provided
-// const configureStore = () => {
-//     const sagaMiddleware = createSagaMiddleware();
-//     if (Constants.appOwnership !== 'standalone') {
-//         return {
-//             ...createStore(reducer,
-//                 applyMiddleware(sagaMiddleware)),
-//             // runSaga: sagaMiddleware.run(saga)
-//         };
-//     } else {
-//         return {
-//             ...createStore(reducer,
-//                 applyMiddleware(sagaMiddleware)),
-//             // runSaga: sagaMiddleware.run(saga)
-//         };
-//     }
-// };
+const configureStore = () => {
+    const sagaMiddleware = createSagaMiddleware();
+    return {
+        ...createStore(reducer,
+            applyMiddleware(sagaMiddleware, logger)),
+        runSaga: sagaMiddleware.run(saga)
+    };
+};
 
-// const store = configureStore();
-
-const store = createStore(reducer);
+const store = configureStore();
 
 export default store;
