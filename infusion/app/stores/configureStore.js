@@ -1,6 +1,6 @@
 import {applyMiddleware, createStore} from "redux";
 import logger from "redux-logger";
-import { persistStore, persistCombineReducers } from "redux-persist";
+import {persistCombineReducers, persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
 import reducers from "./reducer";
@@ -26,5 +26,6 @@ const configureStore = () => {
 };
 
 const store = configureStore();
+persistStore(store);
 
 export default store;
