@@ -11,12 +11,20 @@ export const verifyAuthenticateState = function* (state) {
         const ref = firebase.database().ref();
         if (state && state.user) {
             const uid = state.user.uid;
-            ref
+            const info = yield ref
                 .child("regimenInfo")
                 .child(uid)
-                .on("value", snapshot => {
-
+                .once("value").then(function(snapshot) {
+                    return snapshot.val();
                 });
+
+            yield put({
+                type: common_types.SYNC_FIREBASE_DATA,
+                    path: 'regimenInfo',
+                    subpaths: null,
+                    data: info
+            });
+
         } else {
             const authenticate = yield select(selectors.getAuthenticateState);
 
@@ -34,12 +42,3 @@ export const verifyAuthenticateState = function* (state) {
         console.log(error)
     }
 };
-
-function* onUserSnapshot(snapshot) {
-    yield put({
-        type: common_types.SYNC_FIREBASE_DATA,
-        path: "regimenInfo",
-        subpaths: null,
-        data: snapshot.val()
-    })
-}

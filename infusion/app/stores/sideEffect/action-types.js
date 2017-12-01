@@ -1,0 +1,1 @@
+export const SET_SIDE_EFFECT_DATA = 'SET_SIDE_EFFECT_DATA';
