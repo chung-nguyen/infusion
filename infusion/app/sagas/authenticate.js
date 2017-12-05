@@ -1,5 +1,4 @@
 import {all, put, select} from 'redux-saga/effects';
-import {NavigationActions} from 'react-navigation';
 import * as selectors from '../stores/selectors';
 import * as firebase from 'firebase';
 
@@ -10,6 +9,7 @@ export const verifyAuthenticateState = function* (state) {
     try {
         const ref = firebase.database().ref();
         if (state && state.user) {
+            console.log(state.user.uid);
             const uid = state.user.uid;
             const info = yield ref
                 .child("regimenInfo")

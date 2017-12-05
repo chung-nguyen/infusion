@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {StatusBar} from "react-native";
 import {addNavigationHelpers, StackNavigator} from "react-navigation";
 import {connect} from "react-redux";
 import HomeScreen from "../containers/HomeScreen";
@@ -26,7 +27,7 @@ export const AppNavigator = StackNavigator(
     {
         initialRouteName: "Home",
         navigationOptions: {
-            headerStyle: scaleStyle({height: 80})
+            headerStyle: scaleStyle({height: 96})
         },
         cardStyle: {backgroundColor: "#ffffff"}
     }
@@ -38,6 +39,16 @@ class AppWithNavigationState extends Component {
         super(props);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.appNav != this.props.appNav) {
+            const {appNav} = nextProps;
+            if(appNav.routes[appNav.index].routeName === 'Main') {
+                StatusBar.setHidden(true, null);
+            } else {
+                StatusBar.setHidden(false, null);
+            }
+        }
+    }
 
     render() {
         let {dispatch, appNav} = this.props;

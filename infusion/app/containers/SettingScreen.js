@@ -11,7 +11,7 @@ import { scaleStyle } from "../utils/scaleUIStyle";
 
 class SettingScreen extends React.Component {
     static navigationOptions = {
-        title: "Settings"
+        header: null
     };
 
     state = {};

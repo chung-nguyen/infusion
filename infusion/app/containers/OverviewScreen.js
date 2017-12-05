@@ -9,7 +9,7 @@ import { scaleStyle } from "../utils/scaleUIStyle";
 
 class OverviewScreen extends React.Component {
     static navigationOptions = {
-        title: "Overview"
+        header: null
     };
 
     state = {};

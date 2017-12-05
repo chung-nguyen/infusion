@@ -1,10 +1,10 @@
-import { TabNavigator } from "react-navigation";
+import {TabNavigator, TabBarTop} from "react-navigation";
 
 import OverviewScreen from "../containers/OverviewScreen";
 import DataScreen from "../containers/DataScreen";
 import SettingScreen from "../containers/SettingScreen";
 
-import { scaleStyle } from "../utils/scaleUIStyle";
+import {scaleStyle} from "../utils/scaleUIStyle";
 
 export default TabNavigator(
     {
@@ -13,10 +13,15 @@ export default TabNavigator(
         Setting: { screen: SettingScreen }
     },
     {
+        tabBarPosition: 'top',
+        tabBarComponent: TabBarTop,
         initialRouteName: "Overview",
-        navigationOptions: {
-            headerStyle: scaleStyle({ height: 40 })            
-        },
-        cardStyle: { backgroundColor: "#ffffff" }
+        tabBarOptions: {
+            activeTintColor: '#e91e63',
+            style: scaleStyle({height: 96}),
+            labelStyle: scaleStyle({
+                fontSize: 32
+            })
+        }
     }
 );

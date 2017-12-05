@@ -11,7 +11,7 @@ import * as Actions from "../reducers/actions";
 
 class SettingScreen extends React.Component {
     static navigationOptions = {
-        title: "Settings"
+        header: null
     };
 
     state = {};

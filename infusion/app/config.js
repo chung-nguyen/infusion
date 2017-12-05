@@ -4,6 +4,7 @@ import screenScale from "./utils/screenScale";
 const isIOS = Platform.os === "ios";
 
 const screen = Dimensions.get("window");
+console.log(screen)
 
 const UI_SCALE = screenScale(screen.width * screen.scale, screen.height * screen.scale, 768, 1280) / screen.scale;
 

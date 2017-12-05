@@ -1,15 +1,11 @@
 import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
-import { connect } from "react-redux";
-import { NavigationActions } from "react-navigation";
-
-import config from "../config";
-import md5 from "../utils/md5";
-import { scaleStyle } from "../utils/scaleUIStyle";
+import {View} from "react-native";
+import {connect} from "react-redux";
+import {fetchFirebaseData} from '../stores/actions';
 
 class DataScreen extends React.Component {
     static navigationOptions = {
-        title: "Data"
+        header: null
     };
 
     state = {};
@@ -45,9 +41,9 @@ class DataScreen extends React.Component {
                 });
             }
         } else {
-            // if (fetchSideEffect) {
-            //     this.props.dispatch(ActionTypes.fetchFirebaseData("sideEffect", regimenId));
-            // }
+            if (fetchSideEffect) {
+                this.props.dispatch(fetchFirebaseData("sideEffect", regimenId));
+            }
         }
     }
 }

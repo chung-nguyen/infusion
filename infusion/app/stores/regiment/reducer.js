@@ -14,7 +14,6 @@ export default function regiment(state = DEFAULT_STATE, action) {
             return {...state, ...action.payload.regimenInfo};
 
         case common_types.SYNC_FIREBASE_DATA:
-            console.log(action);
             if (action.path === "regimenInfo") {
                 return {
                     ...state,

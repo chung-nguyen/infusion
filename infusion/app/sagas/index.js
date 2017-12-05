@@ -5,6 +5,7 @@ import * as watchers from "./watchers";
 // function (startForeman) as our root Saga.
 const startForeman = function* () {
     yield fork(watchers.watchVerifyAuthenticateState);
+    yield fork(watchers.watchFetchFirebaseData);
 };
 
 export default startForeman;
