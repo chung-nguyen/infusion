@@ -1,22 +1,28 @@
 import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
-import { connect } from "react-redux";
-import { NavigationActions } from "react-navigation";
-
+import {Button, Slider, StyleSheet, Text, View} from "react-native";
+import {connect} from "react-redux";
+import {Divider} from "react-native-elements";
+import {scaleStyle, scaleStyleSheet} from "../utils/scaleUIStyle";
+import {Calendar} from 'react-native-calendars';
 import config from "../config";
-import md5 from "../utils/md5";
-import { scaleStyle } from "../utils/scaleUIStyle";
+import moment from "moment";
 
 class RegimenInfoScreen extends React.Component {
     static navigationOptions = {
         title: "Regimen Information"
     };
 
-    state = {
-        dayPerInfusion: 0,
-        numberOfInfusion: 0,
-        startInfusionDate: 0
-    };
+    constructor(props) {
+        super(props);
+
+        let date = new Date();
+        this.state = {
+            dayPerInfusion: 0,
+            numberOfInfusion: 0,
+            startInfusionDate: Math.floor(date.getTime())
+        };
+    }
+
 
     componentDidMount() {
         this._updateProps(this.props);
@@ -26,17 +32,61 @@ class RegimenInfoScreen extends React.Component {
         this._updateProps(nextProps);
     }
 
-    render() {
-        return (
-            <View>
-                <Text>dayPerInfusion:</Text>
-                <TextInput onChangeText={text => this.setState({ dayPerInfusion: parseInt(text) })} value={this.state.dayPerInfusion.toString()} />
-                <Text>numberOfInfusion:</Text>
-                <TextInput onChangeText={text => this.setState({ numberOfInfusion: parseInt(text) })} value={this.state.numberOfInfusion.toString()} />
-                <Text>startInfusionDate:</Text>
-                <TextInput onChangeText={text => this.setState({ startInfusionDate: parseInt(text) })} value={this.state.startInfusionDate.toString()} />
+    convertTimeStampToDate(timestamp, format) {
+        return moment(timestamp).format(format);
+    }
 
-                <Button onPress={this.onSubmit} title="Submit" color="#841584" />
+    render() {
+        let markOptions = {};
+        markOptions[this.convertTimeStampToDate(this.state.startInfusionDate, 'YYYY-MM-DD')] = {selected: true};
+
+        return (
+            <View style={styles.container}>
+                <View style={{flex: 1}}>
+                    <Text style={styles.formLabelLarge}>
+                        Days per infusion cycle:{' '}
+                        <Text style={[styles.formLabelLarge, {fontFamily: config.GENERIC_FONT_BOLD}]}>
+                            {this.state.dayPerInfusion}
+                        </Text>
+                    </Text>
+                    <Slider
+                        onValueChange={(value) => this.setState({dayPerInfusion: value})}
+                        minimumValue={0}
+                        maximumValue={30}
+                        step={1}
+                    />
+                    <Text style={styles.formLabelLarge}>
+                        Number of Infusions:{' '}
+                        <Text style={[styles.formLabelLarge, {fontFamily: config.GENERIC_FONT_BOLD}]}>
+                            {this.state.numberOfInfusion}
+                        </Text>
+                    </Text>
+                    <Slider
+                        onValueChange={(value) => this.setState({numberOfInfusion: value})}
+                        minimumValue={0}
+                        maximumValue={30}
+                        step={1}
+                    />
+                    <Text style={styles.formLabelLarge}>
+                        First Infusion:{' '}
+                        <Text style={[styles.formLabelLarge, {fontFamily: config.GENERIC_FONT_BOLD, color: '#777'}]}>
+                            {this.convertTimeStampToDate(this.state.startInfusionDate, 'YYYY-M-D')}
+                        </Text>
+                    </Text>
+                    <Calendar
+                        style={scaleStyle({marginTop: 8})}
+                        markedDates={markOptions}
+                        onDayPress={(day) => {
+                            this.setState({startInfusionDate: day.timestamp})
+                        }}
+                    />
+                </View>
+                <Divider style={scaleStyle({height: 2, backgroundColor: '#555', marginBottom: 8})} />
+                <Button
+                    onPress={this.onSubmit}
+                    title="Done"
+                    color="#841584"
+                />
             </View>
         );
     }
@@ -61,7 +111,8 @@ class RegimenInfoScreen extends React.Component {
     };
 
     _updateProps = props => {
-        this.setState(props.regimenInfo);
+        if (props.regimenInfo.id != null)
+            this.setState(props.regimenInfo);
     };
 }
 
@@ -69,3 +120,31 @@ export default connect(state => ({
     navState: state.navState,
     regimenInfo: state.regimenInfo
 }))(RegimenInfoScreen);
+
+const styles = StyleSheet.create(
+    scaleStyleSheet({
+        container: {
+            flex: 1,
+            paddingHorizontal: 16
+        },
+        formLabelLarge: {
+            fontFamily: config.GENERIC_FONT,
+            fontSize: 40,
+            marginTop: 36
+        },
+        formInput: {
+            margin: 16
+        },
+        button: {
+            backgroundColor: "#f4f5f9",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 16
+        },
+        buttonText: {
+            fontFamily: config.GENERIC_FONT,
+            fontSize: 32,
+            color: "#0477ff"
+        }
+    })
+);

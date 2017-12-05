@@ -11,7 +11,7 @@ const DEFAULT_STATE = {
 export default function regiment(state = DEFAULT_STATE, action) {
     switch (action.type) {
         case REHYDRATE:
-            return {...state, ...action.payload.regimenInfo};
+            return action.payload ? {...state, ...action.payload.regimenInfo} : state;
 
         case common_types.SYNC_FIREBASE_DATA:
             if (action.path === "regimenInfo") {

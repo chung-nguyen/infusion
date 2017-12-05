@@ -8,7 +8,7 @@ import saga from "../sagas";
 
 const config = {
     key: 'root',
-    blacklist: ["authenticate", "appNav"],
+    blacklist: ["regimenInfo", "appNav"],
     storage,
 };
 
