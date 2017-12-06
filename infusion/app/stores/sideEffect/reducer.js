@@ -22,7 +22,7 @@ export default function appState(state = DEFAULT_STATE, action) {
             if (action.path === "sideEffect" && action.data) {
                 let newState = { ...state };
                 const { subpaths, data } = action;
-                
+
 
 
                 return newState;

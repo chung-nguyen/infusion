@@ -26,3 +26,10 @@ export default {
     GENERIC_FONT: "Myriad Pro",
     GENERIC_FONT_BOLD: "Myriad Pro Bold",
 };
+
+export const FATIGUE = 'FATIGUE';
+export const NAUSEA = 'NAUSEA';
+export const BACK_PAIN = 'BACK PAIN';
+export const VOMITING = 'VOMITING';
+export const CONSTIPATION = 'CONSTIPATION';
+export const NEUROPATHY = 'NEUROPATHY';

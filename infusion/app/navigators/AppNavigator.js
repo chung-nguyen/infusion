@@ -40,14 +40,14 @@ class AppWithNavigationState extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.appNav != this.props.appNav) {
-            const {appNav} = nextProps;
-            if(appNav.routes[appNav.index].routeName === 'Main') {
-                StatusBar.setHidden(true, null);
-            } else {
-                StatusBar.setHidden(false, null);
-            }
-        }
+        // if (nextProps.appNav != this.props.appNav) {
+        //     const {appNav} = nextProps;
+        //     if(appNav.routes[appNav.index].routeName === 'Main') {
+        //         StatusBar.setHidden(true, null);
+        //     } else {
+        //         StatusBar.setHidden(false, null);
+        //     }
+        // }
     }
 
     render() {
