@@ -1,9 +1,11 @@
 import React from "react";
-import {Button, Slider, StyleSheet, Text, View} from "react-native";
+import {Alert, Button, Slider, StyleSheet, Text, View} from "react-native";
 import {connect} from "react-redux";
 import {Divider} from "react-native-elements";
+import {Calendar} from "react-native-calendars";
+import {NavigationActions} from "react-navigation";
 import {scaleStyle, scaleStyleSheet} from "../utils/scaleUIStyle";
-import {Calendar} from 'react-native-calendars';
+import {setFirebaseData} from "../stores/actions";
 import config from "../config";
 import moment from "moment";
 
@@ -83,7 +85,7 @@ class RegimenInfoScreen extends React.Component {
                 </View>
                 <Divider style={scaleStyle({height: 2, backgroundColor: '#555', marginBottom: 8})} />
                 <Button
-                    onPress={this.onSubmit}
+                    onPress={() => this.onSubmit()}
                     title="Done"
                     color="#841584"
                 />
@@ -91,23 +93,47 @@ class RegimenInfoScreen extends React.Component {
         );
     }
 
-    onSubmit = () => {
-        // TODO: better unique ID generation, but perhaps this is enough
-        var regimenData = { ...this.state, id: Date.now().toString() };
+    onSubmit() {
+        if (this.state.dayPerInfusion === 0) {
+            Alert.alert(
+                "Error",
+                "Day per infusion must be greater than 0.",
+                [
+                    { text: "OK", onPress: () => {} }
+                ],
+                {cancelable: true}
+            );
+        } else if (this.state.numberOfInfusion === 0) {
+            Alert.alert(
+                "Error",
+                "Number of infusion must be greater than 0.",
+                [
+                    { text: "OK", onPress: () => {} }
+                ],
+                {cancelable: true}
+            );
+        } else {
+            // TODO: better unique ID generation, but perhaps this is enough
+            var regimenData = { ...this.state, id: Date.now().toString() };
 
-        // this.props
-        //     .dispatch(ActionTypes.setRegimenInfo(regimenData))
-        //     .then(() => {
-        //         return this.props.dispatch(
-        //             NavigationActions.reset({
-        //                 index: 0,
-        //                 actions: [NavigationActions.navigate({ routeName: "Main" })]
-        //             })
-        //         );
-        //     })
-        //     .catch(err => {
-        //         // TODO - show error dialog
-        //     });
+            this.props.dispatch(setFirebaseData('regimenInfo', regimenData, () => {
+                this.props.dispatch(
+                    NavigationActions.reset({
+                        index: 0,
+                        actions: [NavigationActions.navigate({ routeName: "Main" })]
+                    })
+                );
+            }, (error) => {
+                Alert.alert(
+                    "Error",
+                    error,
+                    [
+                        { text: "OK", onPress: () => {} }
+                    ],
+                    {cancelable: true}
+                );
+            }))
+        }
     };
 
     _updateProps = props => {

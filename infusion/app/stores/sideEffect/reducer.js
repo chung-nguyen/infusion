@@ -19,16 +19,11 @@ export default function appState(state = DEFAULT_STATE, action) {
 
             return newState;
         case common_types.SYNC_FIREBASE_DATA:
-            if (action.path === "sideEffect") {
+            if (action.path === "sideEffect" && action.data) {
                 let newState = { ...state };
                 const { subpaths, data } = action;
+                
 
-                let substate = newState;
-                for (let i = 0; i < subpaths.length - 1; ++i) {
-                    newState[subpaths[i]] = newState[subpaths[i]] || {};
-                    substate = newState[subpaths[i]];
-                }
-                substate[subpaths[i]] = data;
 
                 return newState;
             }

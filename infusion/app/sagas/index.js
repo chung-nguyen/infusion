@@ -6,6 +6,7 @@ import * as watchers from "./watchers";
 const startForeman = function* () {
     yield fork(watchers.watchVerifyAuthenticateState);
     yield fork(watchers.watchFetchFirebaseData);
+    yield fork(watchers.watchSetFirebaseData);
 };
 
 export default startForeman;

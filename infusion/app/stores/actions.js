@@ -16,3 +16,13 @@ export const fetchFirebaseData = (path, subpaths) => {
         subpaths
     };
 };
+
+export const setFirebaseData = (path, data, onFinish, onError) => {
+    return ({
+        type: types.SET_FIREBASE_DATA,
+        path,
+        data,
+        onFinish,
+        onError
+    })
+};

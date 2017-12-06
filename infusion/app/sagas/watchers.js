@@ -13,3 +13,7 @@ export const watchVerifyAuthenticateState = function* () {
 export const watchFetchFirebaseData = function* () {
     yield takeEvery(common_types.FETCH_FIREBASE_DATA, common_sagas.fetchFirebaseData);
 };
+
+export const watchSetFirebaseData = function* () {
+    yield takeEvery(common_types.SET_FIREBASE_DATA, common_sagas.setFirebaseData);
+}

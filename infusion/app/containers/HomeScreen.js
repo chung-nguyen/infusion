@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { connect } from "react-redux";
-import { NavigationActions } from "react-navigation";
-// import firebase from "react-native-firebase";
-
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {connect} from "react-redux";
+import {NavigationActions} from "react-navigation";
+import {syncFirebaseData} from "../stores/actions";
+import {scaleStyleSheet} from "../utils/scaleUIStyle";
 import config from "../config";
-import { scaleStyle, scaleStyleSheet } from "../utils/scaleUIStyle";
-
 import LoadingOverlay from "../components/LoadingOverlay";
+import * as firebase from "firebase";
+
 
 var IMAGES = {
     signInLogo: require("../assets/images/signInLogo.png")
@@ -33,11 +33,10 @@ class HomeScreen extends React.Component {
 
     componentDidMount() {
         this._updateProps(this.props);
-        this.setState({ isLoading: !this.props.appState.reHydrated });
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.appState.reHydrated && nextProps.authenticate !== this.props.authenticate) {
+        if (nextProps.appState.reHydrated && (nextProps.authenticate !== this.props.authenticate || nextProps.regimenInfo !== this.props.regimenInfo)) {
             this._updateProps(nextProps);
         }
     }
@@ -45,6 +44,7 @@ class HomeScreen extends React.Component {
     _updateProps(props) {
         if (props.authenticate.user) {
             if (this.isRegimenInfoFilled()) {
+                this.setState({isLoading: false});
                 this.props.dispatch(
                     NavigationActions.reset({
                         index: 0,
@@ -52,13 +52,25 @@ class HomeScreen extends React.Component {
                     })
                 );
             } else {
-                this.props.dispatch(
-                    NavigationActions.reset({
-                        index: 0,
-                        actions: [NavigationActions.navigate({ routeName: "RegimenInfo" })]
-                    })
-                );
-            }                
+                let ref = firebase
+                    .database()
+                    .ref('regimenInfo')
+                    .child(this.props.authenticate.user.uid);
+
+                ref.once('value', snapshot => {
+                    this.setState({isLoading: false});
+                    if (snapshot.val() === null) {
+                        this.props.dispatch(
+                            NavigationActions.reset({
+                                index: 0,
+                                actions: [NavigationActions.navigate({routeName: "RegimenInfo"})]
+                            })
+                        );
+                    } else {
+                        this.props.dispatch(syncFirebaseData('regimenInfo', null, snapshot.val()))
+                    }
+                });
+            }
         }        
     }
 
